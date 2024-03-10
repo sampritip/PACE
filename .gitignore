@@ -3,3 +3,4 @@
 main.dSYM/
 venv/
 *.code-workspace
+a.out

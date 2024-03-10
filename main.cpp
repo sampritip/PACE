@@ -93,7 +93,7 @@ vector<string> simple_tokenizer(string s)
 void readFile(int &a, int &b, int &e, vector<int> &edges_A, vector<int> &edges_B)
 {
     ifstream myfile;
-    myfile.open("/Users/spatel2/ResearchStuff/PACE/tiny_test_set/trees_test.gr");
+    myfile.open("/Users/spatel2/ResearchStuff/PACE/tiny_test_set/complete_4_5.gr");
     
     if(myfile.is_open())
     {
@@ -153,6 +153,21 @@ int main()
 
 
    int minCuts = numberOfCuts(edges_A,edges_B,edges, numToIndex);
+
+   if(minCuts == 0)
+   {
+        cout<<"No  further computation needed, mincuts : 0\n";
+        return 0;
+   }
+
+
+    //condition for complete bipartite graph
+    if(edges_A.size() == elementsinA * elementsinB)
+    {
+        cout<<"No  further computation needed, mincuts : "<<elementsinA * (elementsinA - 1) * elementsinB * (elementsinB - 1) / 4<<"\n";
+        return elementsinA * (elementsinA - 1) * elementsinB * (elementsinB - 1) / 4;
+    }
+        
    // cout<<"\n"<<generateAllPermutationsRecursive(edges_A, edges_B, B, 0,elementsinB-1, minCuts, numToIndex, edges, answer)<<"\n";
    // cout<<"\n"<<generateAllPermutationsRecursive(edges_A, edges_B, B, minCuts, 0,elementsinB-1, numToIndex, edges)<<"\n";
     generateAllPermutationsRecursive(edges_A, edges_B, B, minCuts, 0,elementsinB-1, numToIndex, edges);
