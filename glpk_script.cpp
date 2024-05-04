@@ -1,6 +1,5 @@
 // TO DO 
-// 1 - Get the actual order of Set B from Order Matrix
-// 2 - Make a single script file to get the final order of set B.
+// Make a single script file to get the final order of set B.
 
 #include <iostream>
 #include <fstream>
@@ -98,6 +97,7 @@ void solve(vector <int> &edges_A, vector <int> &edges_B) {
 
     outputFile << "/* model section */" << endl;
     outputFile << "param n;" <<endl;
+    outputFile << "param n0;" <<endl;
     outputFile << "set row;" << endl;
     outputFile << "set col;" << endl;
     outputFile << "param c{row, col};" << endl;
@@ -109,15 +109,17 @@ void solve(vector <int> &edges_A, vector <int> &edges_B) {
     outputFile << "\tm[i,j] + m[j,i] = 1;" << endl;
     outputFile << "solve;" << endl;
     outputFile << "printf \"Objective value: \%d\\n\", obj;" << endl;
-    outputFile << "printf \"Matrix m:\\n\";" << endl;
+    outputFile << "printf \"\%d \%d\\n\", n, n0 > \"order_matrix.txt\";" << endl;
     outputFile << "for {i in row} {" << endl;
     outputFile << "\tfor {j in col} {" << endl;
-    outputFile << "\t \tprintf \"m[\%d][\%d] = \%d\\n\", i, j, m[i,j];" << endl;
+    outputFile << "\t \tprintf \"\%d \", m[i,j] >> \"order_matrix.txt\";" << endl;
     outputFile << "\t}" << endl;
+    outputFile << "\tprintf \"\\n\" >> \"order_matrix.txt\";" << endl;
     outputFile << "}" << endl;
     outputFile << "/* data section */" << endl;
     outputFile << "data;" << endl;
     outputFile << "param n := "<<n1<<";" << endl;
+    outputFile << "param n0 := "<<n0<<";" << endl;
     outputFile << "set row := ";
     for(int i=1; i<=n1; i++){
         outputFile << i << " ";

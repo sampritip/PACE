@@ -24,10 +24,14 @@
      ```
 
 4. **Solve ILP Problem**:
-   - Use `glpsol` command-line utility to solve the ILP problem defined in `glpk_model.mod` and output the solution to a file named `solution.txt`.
+   - Use `glpsol` command-line utility to solve the ILP problem defined in `glpk_model.mod`. Order Matrix is printed in the `order_matrix.txt` file.
      ```
-     time glpsol --model glpk_model.mod --output solution.txt
+     time glpsol --model glpk_model.mod
      ```
 
-5. **View Solution**:
-   - `solution.txt` contains both the minimum number of crossings and the optimal values of the Ordering Matrix, which can be used to derive the optimal order of nodes in the free set. Time taken to solve the model is printed in terminal. 
+5. **Get Optimal Permutation**:
+   - Compile and run `get_order.cpp` to get the optimal permutation.
+     ```
+     g++ get_order.cpp -o get_order
+     ./get_order
+     ```
