@@ -35,3 +35,19 @@
      g++ get_order.cpp -o get_order
      ./get_order
      ```
+
+# OR-Tools ILP Solver
+
+This project uses Google’s OR-Tools with the CBC solver to solve ILP problems. 
+
+## Installation
+To use this project, ensure you have Python 3 installed. Then install OR-Tools using pip:
+
+```bash
+   pip install ortools
+```
+## Running the ilp script
+Redirect input from a file `input.gr` into the program.
+``` bash
+   python3 ortools_ilp.py < input.gr
+```
