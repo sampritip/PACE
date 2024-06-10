@@ -1,4 +1,4 @@
-# filter 0 degree nodes, merge 1 deg nodes, remove 1 deg nodes + 2 ILP
+# 0 degree nodes, merging 1 deg nodes, removing 1 deg nodese + 2 ILP
 
 from ortools.linear_solver import pywraplp
 import sys
@@ -454,9 +454,6 @@ def main():
             print(element)
         return
     
-    for node in graph:
-        graph[node].sort()
-    
     # if max_degree <= 2:
     #     order = median_barycenter(graph, n0, n1)
     #     for element in order:
@@ -481,6 +478,8 @@ def main():
     p1_fil_graph, p1_n0, p1_n1, p1_final_to_original = preprocess3(p2_fil_graph, p2_deg, p2_n0, p2_n1, p2_final_to_original)
 
     # phase I of ILP solving 
+    for node in p1_fil_graph:
+        p1_fil_graph[node].sort()
     p1_barycenter_crossing = get_barycenter_crossings(p1_fil_graph, p1_n0, p1_n1)
     p1_crossing_matrix = get_crossing_matrix(p1_fil_graph, p1_n0, p1_n1)
     del p1_fil_graph
@@ -498,6 +497,8 @@ def main():
                 opt_order.append(u)
     else:
         # phase 2 of ILP solving
+        for node in p2_fil_graph:
+            p2_fil_graph[node].sort()
         p2_barycenter_crossing = get_barycenter_crossings(p2_fil_graph, p2_n0, p2_n1)
         p2_crossing_matrix = get_crossing_matrix(p2_fil_graph, p2_n0, p2_n1)
         del p2_fil_graph
